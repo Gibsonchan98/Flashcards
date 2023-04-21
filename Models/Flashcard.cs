@@ -14,10 +14,11 @@ public class Flashcard{
     public int ID {get; }
 
     [Required]
-    [MaxLength(255)]
+    [MaxLength(500)]
     public string question{get; set;} = "?";
 
     [Required]
+    [MaxLength(500)]
     public string answer{get; set;} =  "?";
 
     public bool correct{get; set;} = false; 

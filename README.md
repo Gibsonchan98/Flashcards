@@ -1,2 +1,2 @@
 # Flashcards
-Quick flashcards
+Simple api for flashcards
