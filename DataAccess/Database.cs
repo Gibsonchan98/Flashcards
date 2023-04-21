@@ -21,10 +21,13 @@ public class Database : IDatabase
 
             int newId = (int) cmd.ExecuteScalar();
             cardToBeCreated.ID = newId; 
+            if(newId != 0){
+                return cardToBeCreated;
+            }
 
         } catch(SqlException){
             throw; 
-        }
+        }                                
         return null;
     }
 
@@ -34,7 +37,8 @@ public class Database : IDatabase
     }
 
     public List<Flashcard> getAllCards()
-    {
+    {   
+        List<Flashcard> flashcards = new();
         throw new NotImplementedException();
     }
 
