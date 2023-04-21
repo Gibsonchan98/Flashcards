@@ -1,4 +1,5 @@
 using Models;
+using Microsoft.Data.SqlClient;
 using System;
 
 namespace DataAccess;
@@ -9,9 +10,22 @@ public class Database : IDatabase
     public Database(string connectionString){
        this._connectionString = connectionString;
     }
-    public Flashcard createFlashcard(Flashcard cardToBeCreated)
+    public Flashcard? createFlashcard(Flashcard cardToBeCreated)
     {
-        throw new NotImplementedException();
+        try{
+            using SqlConnection conn = new SqlConnection(_connectionString);
+            conn.Open();
+            using SqlCommand cmd = new SqlCommand("", conn);
+            cmd.Parameters.AddWithValue("@ques", cardToBeCreated.question);
+            cmd.Parameters.AddWithValue("@ans", cardToBeCreated.question);
+
+            int newId = (int) cmd.ExecuteScalar();
+            cardToBeCreated.ID = newId; 
+
+        } catch(SqlException){
+            throw; 
+        }
+        return null;
     }
 
     public bool deleteCard(Flashcard cardToBeDeleted)
