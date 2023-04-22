@@ -5,13 +5,13 @@ using Models;
 namespace DataAccess;
 
 public interface IDatabase{
-    List<Flashcard> getAllCards();
+    List<Flashcard>? getAllCards();
 
-    Flashcard createFlashcard(Flashcard cardToBeCreated);
+    Flashcard? createFlashcard(Flashcard cardToBeCreated);
 
-    Flashcard updateCard(Flashcard cardToUpdate);
+    Flashcard? updateCard(Flashcard cardToUpdate);
 
-    Flashcard getCard(int id); 
+    Flashcard? getCard(int id); 
 
-    Boolean deleteCard(Flashcard cardToBeDeleted);
+    bool deleteCard(Flashcard cardToBeDeleted);
 }
