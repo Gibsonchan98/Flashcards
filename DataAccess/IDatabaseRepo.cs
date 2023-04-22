@@ -1,10 +1,8 @@
-using System; 
- 
 using Models; 
 
 namespace DataAccess;
 
-public interface IDatabase{
+public interface IDatabaseRepo{
     List<Flashcard>? getAllCards();
 
     Flashcard? createFlashcard(Flashcard cardToBeCreated);

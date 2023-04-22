@@ -5,9 +5,9 @@ namespace Services;
 
 public class FService{
     
-    private readonly Database _database; 
+    private readonly IDatabaseRepo _database; 
 
-    public FService(Database db){
+    public FService(IDatabaseRepo db){
         this._database = db;
     }
 
@@ -39,7 +39,9 @@ public class FService{
     public bool deleteCard(int id){
         Flashcard? card = _database.getCard(id);
         if(card != null){
-            return _database.deleteCard(id);
+            if(_database.deleteCard(id) == true && _database.getCard(id) == null){
+                return true;
+            }
         }
         return false; 
     }

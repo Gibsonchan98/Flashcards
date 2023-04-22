@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
 
+[Route("api/[controller]")]
 [ApiController]
-[Route("[controller]")]
 public class FlashcardController : ControllerBase
 {
      private readonly ILogger<FlashcardController> _logger;
@@ -17,13 +17,15 @@ public class FlashcardController : ControllerBase
         this._service = service;
     }
 
-    [HttpGet(Name = "GetAllFlashcards")]
+    [HttpGet]
+    [Route("allflashcards")]
     public List<Flashcard>? Get(){
         return this._service.getAllCards();
     }
 
-    [HttpGet (Name = "GetFlashcardByID")]
-    public Flashcard? GetByID([FromQuery] int id){
+    [HttpGet]
+    [Route("byId/{id:int}")]
+    public Flashcard? GetByID(int id){
         if(id != 0){
             return this._service.getCardByID(id); 
         }
