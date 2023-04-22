@@ -23,7 +23,9 @@ public class Flashcard{
 
     public bool correct{get; set;} = false; 
 
-    public string category{get; set;} = "";
+    [Required]
+    [MaxLength(150)]
+    public string category{get; set;} = "?";
 
     public override string ToString()
     {
@@ -39,12 +41,15 @@ public class Flashcard{
         }
         Flashcard card = (Flashcard)obj;
 
-        if(card.answer != this.answer || this.question!= this.question || this.category != card.category){
+        if(card.answer != this.answer || this.question!= this.question || this.category != card.category || this.correct != card.correct){
             return false;
         }
         
         return true;
     }
-    
 
+    public override int GetHashCode()
+    {
+        throw new NotImplementedException();
+    }
 }

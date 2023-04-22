@@ -1,7 +1,9 @@
+-- DROP TABLE FLASHCARDS
+
 CREATE TABLE FLASHCARDS (
     ID INT PRIMARY KEY IDENTITY(1,1), 
-    Question CHAR(500), 
-    Answer CHAR(500), 
-    Correct BIT
+    Question VARCHAR(500), 
+    Answer VARCHAR(500), 
+    Correct BIT,
+    Category VARCHAR(150)
 )
-

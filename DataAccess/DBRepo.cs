@@ -15,15 +15,16 @@ public class DBRepo : IDatabaseRepo
         try{
             using SqlConnection conn = new SqlConnection(_connectionString);
             conn.Open();
-            string query = "INSERT into FLASHCARDS (Question, Answer, Correct) VALUES (@ques, @ans, @corr)";
+            string query = "INSERT INTO FLASHCARDS (Question, Answer, Correct, Category) OUTPUT INSERTED.Id VALUES (@ques, @ans, @corr, @cat)";
             using SqlCommand cmd = new SqlCommand(query, conn);
             cmd.Parameters.AddWithValue("@ques", cardToBeCreated.question);
-            cmd.Parameters.AddWithValue("@ans", cardToBeCreated.question);
-            cmd.Parameters.AddWithValue("@corr", cardToBeCreated.category);
+            cmd.Parameters.AddWithValue("@ans", cardToBeCreated.answer);
+            cmd.Parameters.AddWithValue("@corr", cardToBeCreated.correct);
+            cmd.Parameters.AddWithValue("@cat", cardToBeCreated.category);
 
             int newId = (int) cmd.ExecuteScalar();
             cardToBeCreated.ID = newId; 
-            if(newId != 0){
+            if(cardToBeCreated.ID != 0){
                 return cardToBeCreated;
             }
             return null;
@@ -63,12 +64,14 @@ public class DBRepo : IDatabaseRepo
                     string que = (string) reader["Question"];
                     string ans = (string) reader["Answer"];
                     bool corr = (bool) reader["Correct"];
+                    string cat = (string) reader["Category"];
 
                     Flashcard card = new Flashcard {
                         ID = id, 
                         question = que,
                         answer = ans, 
-                        correct = corr
+                        correct = corr, 
+                        category = cat
                     };
 
                     flashcards.Add(card);
@@ -97,12 +100,14 @@ public class DBRepo : IDatabaseRepo
                     string que = (string) reader["Question"];
                     string ans = (string) reader["Answer"];
                     bool corr = (bool) reader["Correct"];
+                    string cat = (string) reader["Category"];
 
                     Flashcard card = new Flashcard {
                         ID = Id, 
                         question = que,
                         answer = ans, 
-                        correct = corr
+                        correct = corr, 
+                        category = cat
                     };
 
                     return card; 
@@ -121,27 +126,16 @@ public class DBRepo : IDatabaseRepo
         try{
             using SqlConnection conn = new SqlConnection(_connectionString);
             conn.Open();
-            string query = "UPDATE FLASHCARDS SET Question = @ques, Answer = @ans, Correct = @corr WHERE ID = @Id";
+            string query = "UPDATE FLASHCARDS SET Question = @ques, Answer = @ans, Correct = @corr, Category = @cat WHERE ID = @Id";
             using SqlCommand cmd = new SqlCommand(query, conn);
             cmd.Parameters.AddWithValue("@ques", cardToUpdate.question);
             cmd.Parameters.AddWithValue("@ans", cardToUpdate.answer);
             cmd.Parameters.AddWithValue("@corr", cardToUpdate.correct);
+            cmd.Parameters.AddWithValue("@cat", cardToUpdate.category);
             cmd.Parameters.AddWithValue("@Id", cardToUpdate.ID);
+            cmd.ExecuteNonQuery();
 
-            using SqlDataReader reader = cmd.ExecuteReader();
-            if(reader.HasRows){
-                reader.Read();
-
-                card = new Flashcard {
-                    ID = (int) reader["ID"], 
-                    question = (string) reader["Question"],
-                    answer = (string) reader["Answer"],
-                    correct = (bool) reader["Correct"]
-                }; 
-
-            }
-
-            return card;
+            return this.getCard(cardToUpdate.ID);
         } catch(SqlException){
             throw;
         }
