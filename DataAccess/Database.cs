@@ -31,23 +31,23 @@ public class Database : IDatabase
         return null;
     }
 
-    public bool deleteCard(Flashcard cardToBeDeleted)
+    public bool deleteCard(int id)
     {
         throw new NotImplementedException();
     }
 
-    public List<Flashcard> getAllCards()
+    public List<Flashcard>? getAllCards()
     {   
         List<Flashcard> flashcards = new();
         throw new NotImplementedException();
     }
 
-    public Flashcard getCard(int id)
+    public Flashcard? getCard(int id)
     {
         throw new NotImplementedException();
     }
 
-    public Flashcard updateCard(Flashcard cardToUpdate)
+    public Flashcard? updateCard(Flashcard cardToUpdate)
     {
         throw new NotImplementedException();
     }

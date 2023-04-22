@@ -30,8 +30,8 @@ public class FlashcardController : ControllerBase
         return null;
     }
 
-    [HttpDelete]
-    public bool Delete([FromQuery] int id){
+    [HttpDelete("{id}")]
+    public bool Delete(int id){
         if(id != 0){
             return this._service.deleteCard(id); 
         }
@@ -48,7 +48,7 @@ public class FlashcardController : ControllerBase
 
     [HttpPut("{id}")]
     public Flashcard? Update(int id, [FromBody] Flashcard cardToBeUpdated){
-        if(cardToBeUpdated != null){
+        if(cardToBeUpdated != null && id != 0){
             return this._service.updateCard(id ,cardToBeUpdated);
         }
         return null;

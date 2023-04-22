@@ -13,5 +13,5 @@ public interface IDatabase{
 
     Flashcard? getCard(int id); 
 
-    bool deleteCard(Flashcard cardToBeDeleted);
+    bool deleteCard(int id);
 }

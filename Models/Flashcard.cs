@@ -30,5 +30,21 @@ public class Flashcard{
         return $"{question}: {answer}";
     }
 
+     // override object.Equals
+    public override bool Equals(object? obj)
+    {
+        if (obj == null || GetType() != obj.GetType())
+        {
+            return false;
+        }
+        Flashcard card = (Flashcard)obj;
+
+        if(card.answer != this.answer || this.question!= this.question || this.category != card.category){
+            return false;
+        }
+        
+        return true;
+    }
+    
 
 }
