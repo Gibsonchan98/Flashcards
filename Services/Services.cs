@@ -27,7 +27,7 @@ public class FService{
     }
 
     /// update card
-    public Flashcard? updateCard(Flashcard updatedCard){
+    public Flashcard? updateCard(int id, Flashcard updatedCard){
         return null;
     } 
 

@@ -46,10 +46,10 @@ public class FlashcardController : ControllerBase
         return null;
     }
 
-    [HttpPut]
-    public Flashcard? Update([FromBody] Flashcard cardToBeUpdated){
+    [HttpPut("{id}")]
+    public Flashcard? Update(int id, [FromBody] Flashcard cardToBeUpdated){
         if(cardToBeUpdated != null){
-            return this._service.updateCard(cardToBeUpdated);
+            return this._service.updateCard(id ,cardToBeUpdated);
         }
         return null;
     }
