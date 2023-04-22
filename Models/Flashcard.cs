@@ -11,7 +11,7 @@ public class Flashcard{
         this.answer = a; 
     }
 
-    public int ID {get; }
+    public int ID {get; set;}
 
     [Required]
     [MaxLength(500)]
