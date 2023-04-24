@@ -9,9 +9,6 @@ on:
       - main
   workflow_dispatch:
 
-env:
-  WORKING_DIR: API
-
 jobs:
   build:
     runs-on: windows-latest
@@ -56,5 +53,5 @@ jobs:
         with:
           app-name: 'FlashcardsSimpleAPI'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_414231196C51412FB446DCADD02E716D }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_7AB3C7DA68BF41D2B0351B7F20DB7C0C }}
           package: .
