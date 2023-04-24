@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/af7ce1fb-a4b0-4adf-b0aa-c17888c41ac2/resourceGroups/Projects/providers/Microsoft.Web/sites/FlashcardsSimpleAPI",
+    "appService.deploySubpath": "API\\dist"
+}
