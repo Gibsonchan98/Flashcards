@@ -41,7 +41,7 @@ public class Flashcard{
         }
         Flashcard card = (Flashcard)obj;
 
-        if(card.answer != this.answer || this.question!= this.question || this.category != card.category || this.correct != card.correct){
+        if(card.answer != this.answer || this.question!= card.question || this.category != card.category || this.correct != card.correct){
             return false;
         }
         
